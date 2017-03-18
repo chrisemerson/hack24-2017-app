@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    github_id: 98c97727e02c7f5e3415
+    github_secret: INSERT_SECRET_HERE

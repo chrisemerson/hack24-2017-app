@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
@@ -68,3 +68,32 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address:     no-reply@ifyoutolerategitthenyourchildrenwillbenext.com
+        sender_name: If you tolerate git then your children will be less
+
+hwi_oauth:
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    firewall_names: [main]
+
+    resource_owners:
+        github:
+            type:                github
+            client_id:           '%github_id%'
+            client_secret:       '%github_secret%'
+            scope:               'user:email,public_repo'
+    connect:
+        account_connector: hwi_oauth.user.provider.fosub_bridge
+
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            github: githubId
