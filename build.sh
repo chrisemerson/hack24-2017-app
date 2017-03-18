@@ -5,4 +5,4 @@ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
 yum install ansible python-devel python-pip openssl-devel -y --enablerepo=epel
 
-ansible-playbook lampstack.yml
+sudo ansible-playbook lampstack.yml -i "localhost," -c local
