@@ -10,15 +10,17 @@ class OwnCloudFilesChangedAction extends AbstractAction
     {
         // Extract JSON
         $owncloudPath = '/owncloud/';
-        $project = 'my/project';
-        $user = 'LewisW';
+        $fullpath = 'my/project';
 
-        // Copy files from owncloud
-
-        // Set author
+        list($user, $path) = explode('/', $fullpath, 2);
 
         $git = new \PHPGit\Git();
-        $git->setRepository($owncloudPath . $project);
+
+        // Set author
+        $git->config([
+            'user.name' => $user
+        ]);
+        $git->setRepository($owncloudPath . $user);
         $git->checkout->create($user);
 
         // Merge develop into user's branch, check that no conflicts occur
