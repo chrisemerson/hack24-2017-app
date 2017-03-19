@@ -9,13 +9,25 @@ class OwnCloudFilesChangedAction extends AbstractAction
     function __invoke(Request $request, Response $response, array $args)
     {
         // Extract JSON
+        $owncloudPath = '/owncloud/';
+        $project = 'my/project';
+        $user = 'LewisW';
 
-        // Commit files to git, using separate branches per user
+        // Copy files from owncloud
+
+        // Set author
+
+        $git = new \PHPGit\Git();
+        $git->setRepository($owncloudPath . $project);
+        $git->checkout->create($user);
 
         // Merge develop into user's branch, check that no conflicts occur
+        try {
+            $git->merge('master');
+        } catch (\PHPGit\Exception\GitException $e) {
+            $git->merge->abort();
+        }
 
-        // If no conflicts, merge user's branch into develop
-
-        // Merge develop into branches of all other users to 'share' content perhaps?
+        $git->push();
     }
 }
