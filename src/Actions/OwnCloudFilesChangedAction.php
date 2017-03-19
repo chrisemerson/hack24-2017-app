@@ -82,7 +82,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
 //            'all' => true
 //        ]);
 
-        // Merge develop into user's branch, check that no conflicts occur
+        // Merge master into user's branch, check that no conflicts occur
         try {
             $git->merge('master');
         } catch (GitException $e) {
@@ -93,7 +93,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
         $git->push('origin', $body['username']);
         $git->checkout('master');
 
-        // Merge it into develop
+        // Merge it into master
         try {
             $git->merge($body['username']);
         } catch (GitException $e) {
