@@ -66,7 +66,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        exec('cp -R /var/data/ /var/owncloud-repo/');
+        exec('cp -R /var/data/* /var/owncloud-repo/');
 
         $git->setRepository("/var/owncloud-repo");
 
