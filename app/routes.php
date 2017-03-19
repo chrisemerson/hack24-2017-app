@@ -14,4 +14,4 @@ $app->get('/fileschanged', OwnCloudFilesChangedAction::class);
 $app->post('/gitfileschanged', GitFilesChangedAction::class);
 $app->get('/gitfileschanged', GitFilesChangedAction::class);
 
-$app->get('/resolve/{hash1:[a-f0-9]{32}}/{hash2:[a-f0-9]{32}}', ResolveConflictsAction::class);
+$app->get('/resolve/{hash1:[a-f0-9]{40}}/{hash2:[a-f0-9]{40}}', ResolveConflictsAction::class);
