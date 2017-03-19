@@ -81,7 +81,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             'all' => true
         ]);
 
-        exec('cd /var/owncloud-repo/; git commit -am "'. self::$lyrics[array_rand(self::$lyrics)] .'"');
+        exec('cd /var/owncloud-repo/; git commit -a -m "lyrics"');
 
 //        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
 //            'all' => true
