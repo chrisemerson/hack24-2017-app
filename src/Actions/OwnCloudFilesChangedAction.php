@@ -66,7 +66,9 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        $git->setRepository("/tmp/owncloud-repo");
+        copy('/var/owncloud-sync', '/var/owncloud-repo');
+
+        $git->setRepository("/var/owncloud-repo");
 
         try {
             $git->checkout($body['username']);
@@ -81,10 +83,21 @@ class OwnCloudFilesChangedAction extends AbstractAction
         try {
             $git->merge('master');
         } catch (GitException $e) {
-            print_r($e);
             $git->merge->abort();
+            throw $e;
         }
 
         $git->push('origin', $body['username']);
+        $git->checkout('master');
+
+        // Merge it into develop
+        try {
+            $git->merge($body['username']);
+        } catch (GitException $e) {
+            $git->merge->abort();
+            throw $e;
+        }
+
+        $git->push('origin', 'master');
     }
 }
