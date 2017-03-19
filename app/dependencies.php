@@ -1,12 +1,21 @@
 <?php
 // DIC configuration
 
+use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
+
 $container = $app->getContainer();
 
-// view renderer
-$container['renderer'] = function ($c) {
-    $settings = $c->get('settings')['renderer'];
-    return new Slim\Views\PhpRenderer($settings['template_path']);
+$container['view'] = function ($c) {
+    $view = new Twig('templates', [
+        'cache' => false
+    ]);
+
+    // Instantiate and add Slim specific extension
+    $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new TwigExtension($c['router'], $basePath));
+
+    return $view;
 };
 
 // monolog
