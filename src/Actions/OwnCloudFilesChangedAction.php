@@ -66,7 +66,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        exec('cp -R /var/data /var/owncloud-repo');
+        exec('cp -R /var/data/ /var/owncloud-repo');
 
         $git->setRepository("/var/owncloud-repo");
 
@@ -77,6 +77,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
         }
 
         // Commit
+        $git->add('.');
         $git->commit(self::$lyrics[array_rand(self::$lyrics)]);
 
         // Merge develop into user's branch, check that no conflicts occur
