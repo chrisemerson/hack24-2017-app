@@ -71,7 +71,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
         $git->setRepository("/var/owncloud-repo");
 
 //        $git->checkout('master');
-//        $git->pull();
+        $git->pull();
 
         try {
             $git->checkout($body['username']);
