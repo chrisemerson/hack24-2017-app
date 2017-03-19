@@ -16,7 +16,7 @@ class GitFilesChangedAction extends AbstractAction
         $git->checkout('master');
         $git->pull();
 
-        copy('/var/owncloud-repo', '/var/data');
+        exec('cp /var/owncloud-repo /var/data');
         exec('rm -fr /var/data/.git');
     }
 }
