@@ -76,12 +76,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             $git->checkout->create($body['username']);
         }
 
-        // Commit
-        $git->add('.', [
-            'all' => true
-        ]);
-
-        exec('cd /var/owncloud-repo/; git commit -a -m "lyrics"');
+        exec('cd /var/owncloud-repo/; git commit --untracked-files=all -m "lyrics"');
 
 //        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
 //            'all' => true
