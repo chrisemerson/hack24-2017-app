@@ -17,7 +17,8 @@
         "slim/php-view": "^2.0",
         "monolog/monolog": "^1.17",
         "slim/twig-view": "^2.2",
-        "potherca/flysystem-github": "^0.3.0"
+        "potherca/flysystem-github": "^0.3.0",
+        "league/oauth2-client": "^2.2"
     },
     "autoload": {
         "psr-4": {
