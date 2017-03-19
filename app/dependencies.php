@@ -7,9 +7,12 @@ use Slim\Views\TwigExtension;
 $container = $app->getContainer();
 
 $container['view'] = function ($c) {
-    $view = new Twig('templates', [
-        'cache' => false
-    ]);
+    $view = new Twig(
+        $c['settings']['renderer']['template_path'],
+        [
+            'cache' => $c['settings']['renderer']['cache']
+        ]
+    );
 
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
