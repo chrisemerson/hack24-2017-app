@@ -80,9 +80,12 @@ class OwnCloudFilesChangedAction extends AbstractAction
         $git->add('.', [
             'all' => true
         ]);
-        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
-            'all' => true
-        ]);
+
+        exec('cd /var/owncloud-repo/; git commit -am "'. self::$lyrics[array_rand(self::$lyrics)] .'"');
+
+//        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
+//            'all' => true
+//        ]);
 
         // Merge develop into user's branch, check that no conflicts occur
         try {
