@@ -8,6 +8,6 @@ class ResolveConflictsAction extends AbstractAction
 {
     function __invoke(Request $request, Response $response, array $args)
     {
-
+        $this->render($response, 'resolve.twig', $args);
     }
 }
