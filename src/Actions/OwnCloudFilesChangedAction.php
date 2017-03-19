@@ -66,7 +66,9 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        $git->setRepository("c:\\code\\hack24-2017-documents");
+        exec('cp -R /var/data/* /var/owncloud-repo/');
+
+        $git->setRepository("/var/owncloud-repo");
 
         try {
             $git->checkout($body['username']);
@@ -74,17 +76,31 @@ class OwnCloudFilesChangedAction extends AbstractAction
             $git->checkout->create($body['username']);
         }
 
-        // Commit
-        $git->commit(self::$lyrics[array_rand(self::$lyrics)]);
+        exec('cd /var/owncloud-repo/; git commit --untracked-files=all -m "lyrics"');
+
+//        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
+//            'all' => true
+//        ]);
 
         // Merge develop into user's branch, check that no conflicts occur
         try {
             $git->merge('master');
         } catch (GitException $e) {
-            print_r($e);
             $git->merge->abort();
+            throw $e;
         }
 
         $git->push('origin', $body['username']);
+        $git->checkout('master');
+
+        // Merge it into develop
+        try {
+            $git->merge($body['username']);
+        } catch (GitException $e) {
+            $git->merge->abort();
+            throw $e;
+        }
+
+        $git->push('origin', 'master');
     }
 }
