@@ -66,7 +66,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        copy('/var/owncloud-sync', '/var/owncloud-repo');
+        copy('/var/data', '/var/owncloud-repo');
 
         $git->setRepository("/var/owncloud-repo");
 
