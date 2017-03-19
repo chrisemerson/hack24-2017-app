@@ -66,7 +66,7 @@ class OwnCloudFilesChangedAction extends AbstractAction
             ]
         ]);
 
-        $git->setRepository("c:\\code\\hack24-2017-documents");
+        $git->setRepository("/tmp/owncloud-repo");
 
         try {
             $git->checkout($body['username']);
