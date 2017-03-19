@@ -11,28 +11,38 @@
                 width: 100%;
                 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
                 text-align: center;
-                color: #aaa;
+                color: #999;
+                background-color: #333;
                 font-size: 18px;
+                height: 100%;
             }
 
             h1 {
-                color: #719e40;
+                color: #ddd;
                 letter-spacing: -3px;
                 font-family: 'Lato', sans-serif;
                 font-size: 100px;
                 font-weight: 200;
                 margin-bottom: 0;
             }
+
+            h1 em {
+                font-style: normal;
+                color: #fff;
+            }
+
+            div {
+                position: absolute;
+                bottom: 30px;
+                width: 100%;
+                text-align: center;
+                font-size: .8em
+            }
         </style>
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
+        <h1>If you tolerate <em>git</em> then your children will be next</h1>
 
-        {% if name %}
-            <h2>Hello {{ name }}!</h2>
-        {% else %}
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a>
-        {% endif %}
+        <div>(Yes, we really did register this domain.)</div>
     </body>
 </html>
