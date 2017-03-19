@@ -77,8 +77,12 @@ class OwnCloudFilesChangedAction extends AbstractAction
         }
 
         // Commit
-        $git->add('.');
-        $git->commit(self::$lyrics[array_rand(self::$lyrics)]);
+        $git->add('.', [
+            'all' => true
+        ]);
+        $git->commit(self::$lyrics[array_rand(self::$lyrics)], [
+            'all' => true
+        ]);
 
         // Merge develop into user's branch, check that no conflicts occur
         try {
