@@ -18,12 +18,12 @@ abstract class AbstractAction
 
     abstract function __invoke(Request $request, Response $response, array $args);
 
-    public function __get($name)
+    protected function __get($name)
     {
         return $this->container->get($name);
     }
 
-    public function get($name)
+    protected function get($name)
     {
         return $this->container->get($name);
     }
